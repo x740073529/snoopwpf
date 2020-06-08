@@ -14,6 +14,7 @@ namespace Snoop.Data
             this.MultipleAppDomainMode = MultipleAppDomainMode.Ask;
             this.MultipleDispatcherMode = MultipleDispatcherMode.Ask;
             this.SetWindowOwner = true;
+            this.SwallowException = false;
         }
 
         public static TransientSettingsData Current { get; private set; }
@@ -27,6 +28,8 @@ namespace Snoop.Data
         public bool SetWindowOwner { get; set; }
 
         public long TargetWindowHandle { get; set; }
+
+        public bool SwallowException { get; set; }
 
         public string WriteToFile()
         {

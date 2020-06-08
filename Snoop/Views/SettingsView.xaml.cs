@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Configuration;
     using System.Linq;
     using System.Windows;
     using Snoop.Infrastructure;
@@ -14,7 +15,8 @@
                                                                         {
                                                                             nameof(Settings.Default.MultipleAppDomainMode),
                                                                             nameof(Settings.Default.MultipleDispatcherMode),
-                                                                            nameof(Settings.Default.SetOwnerWindow)
+                                                                            nameof(Settings.Default.SetOwnerWindow),
+                                                                            nameof(Settings.Default.SwallowException)
                                                                         };
 
         public static readonly DependencyProperty PropertiesProperty = DependencyProperty.Register(nameof(Properties), typeof(ObservableCollection<PropertyInformation>), typeof(SettingsView), new PropertyMetadata(default(ObservableCollection<PropertyInformation>)));

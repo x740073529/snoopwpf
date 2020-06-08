@@ -69,5 +69,21 @@ namespace Snoop.Properties {
                 this["MultipleDispatcherMode"] = value;
             }
         }
+
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SwallowException
+        {
+            get
+            {
+                return ((bool)(this["SwallowException"]));
+            }
+            set
+            {
+                this["SwallowException"] = value;
+            }
+        }
     }
 }

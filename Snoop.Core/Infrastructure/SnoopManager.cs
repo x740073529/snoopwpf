@@ -66,6 +66,8 @@
 
             var settingsData = TransientSettingsData.LoadCurrent(settingsFile);
 
+            SnoopModes.SwallowExceptions = settingsData.SwallowException;
+
             IList<AppDomain> appDomains = null;
 
             if (settingsData.MultipleAppDomainMode != MultipleAppDomainMode.NeverUse)
@@ -316,11 +318,19 @@
 
                     rootVisual.Dispatcher.Invoke((Action)(() =>
                     {
-                        var snoopInstance = instanceCreator(settingsData, rootVisual.Dispatcher);
-
-                        if (snoopInstance.Target is null)
+                        try
                         {
-                            snoopInstance.Target = rootVisual;
+                            var snoopInstance = instanceCreator(settingsData, rootVisual.Dispatcher);
+
+                            if (snoopInstance.Target is null)
+                            {
+                                snoopInstance.Target = rootVisual;
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                            Trace.WriteLine($"Failed to createInstance Snoop in app domain \"{AppDomain.CurrentDomain.FriendlyName}\".");
+                            ErrorDialog.ShowExceptionMessageBox(exception, "Error snooping", "There was an error snooping the application.");
                         }
                     }));
 
